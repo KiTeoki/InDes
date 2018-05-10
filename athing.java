@@ -1,3 +1,3 @@
 public class athing {
-    private bool isWorking = true;
+    private boolean isWorking = true;
 }
