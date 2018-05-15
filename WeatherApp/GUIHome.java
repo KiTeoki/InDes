@@ -10,11 +10,15 @@ public class GUIHome {
         JFrame base =GUIBasic.loadhomeScreen();
         JPanel homepanel = new JPanel();
         homepanel.setLayout(new GridLayout(3,1));
+<<<<<<< HEAD
 
         //tempriture bar goes here
+=======
+        //Temperature bar goes here
+>>>>>>> Tudor
         JPanel tempPan = new JPanel();
         tempPan.setBackground(Color.cyan);
-        JLabel tempLable = new JLabel("Wow this is the Temprture");
+        JLabel tempLabel = new JLabel("Wow this is the Temperature", SwingConstants.CENTER);
         JPanel settingsBar = new JPanel();
         settingsBar.setBackground(Color.cyan);
         settingsBar.setLayout(new GridLayout(1,5));
@@ -37,8 +41,11 @@ public class GUIHome {
         });
         settingspanelHolder[4].add(settings);
 
-        tempPan.add(BorderLayout.NORTH,settingsBar);
-        tempPan.add(BorderLayout.CENTER,tempLable);
+        tempPan.setLayout(new GridLayout(2,1));
+        //the top block contains the settingsBar and...
+        tempPan.add(settingsBar);
+        //the bottom, the label
+        tempPan.add(BorderLayout.CENTER, tempLabel);
 
         //logo pannel
         JPanel logoPan = new JPanel();
