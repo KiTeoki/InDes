@@ -1,3 +1,5 @@
+package WeatherApp;
+
 import javax.swing.*;
 
 public class Main {
