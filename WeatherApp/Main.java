@@ -1,3 +1,5 @@
+Added package declaratoin
+
 import javax.swing.*;
 
 public class Main {
