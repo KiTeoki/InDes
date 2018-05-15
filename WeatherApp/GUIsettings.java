@@ -1,10 +1,13 @@
+package WeatherApp;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class GUIsettings {
-    public static JPanel loadSettings() {
+    public static JPanel loadSettings() throws IOException {
         JFrame base =GUIBasic.loadhomeScreen();
         JPanel settingpanel = new JPanel();
         settingpanel.setLayout(new GridLayout(3,1));
@@ -31,10 +34,14 @@ public class GUIsettings {
         JButton backButton = new JButton();
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                base.remove(settingpanel);
-                base.add(GUIHome.loadHome());
-                base.invalidate();
-                base.revalidate();
+                try {
+                    base.remove(settingpanel);
+                    base.add(GUIHome.loadHome());
+                    base.invalidate();
+                    base.revalidate();
+                }catch (IOException r){
+                    r.printStackTrace();
+                }
             }
         });
         backPanelHolder[0].add(backButton);
