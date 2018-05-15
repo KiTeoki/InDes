@@ -1,5 +1,3 @@
-package WeatherApp;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,12 +8,7 @@ public class GUIHome {
         JFrame base =GUIBasic.loadhomeScreen();
         JPanel homepanel = new JPanel();
         homepanel.setLayout(new GridLayout(3,1));
-<<<<<<< HEAD
 
-        //tempriture bar goes here
-=======
-        //Temperature bar goes here
->>>>>>> Tudor
         JPanel tempPan = new JPanel();
         tempPan.setBackground(Color.cyan);
         JLabel tempLabel = new JLabel("Wow this is the Temperature", SwingConstants.CENTER);
