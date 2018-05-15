@@ -19,6 +19,15 @@ public class GUIsettings {
         JPanel backBar = new JPanel();
         backBar.setBackground(Color.cyan);
         backBar.setLayout(new GridLayout(1,5));
+
+        JPanel[] backPanelHolder = new JPanel[5];
+
+        for(int m = 0; m < 5; m++) {
+            backPanelHolder[m] = new JPanel();
+            backPanelHolder[m].setBackground(Color.cyan);
+            backBar.add(backPanelHolder[m]);
+        }
+
         JButton backButton = new JButton();
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -28,7 +37,7 @@ public class GUIsettings {
                 base.revalidate();
             }
         });
-        backBar.add(backButton);
+        backPanelHolder[0].add(backButton);
 
         locationPan.add(BorderLayout.NORTH,backBar);
         locationPan.add(BorderLayout.CENTER,locLabel);
