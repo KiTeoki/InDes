@@ -19,7 +19,7 @@ public class APIInterface {
     public APIInterface() {
         try {
             //open file, tokenise, interpret as JSONArray, close file
-            FileReader cityListFile = new FileReader("city.list.json");
+            FileReader cityListFile = new FileReader("city.list.min.json");
             JSONTokener cityListTokens = new JSONTokener(cityListFile);
             cityList = new JSONArray(cityListTokens);
             cityListFile.close();
