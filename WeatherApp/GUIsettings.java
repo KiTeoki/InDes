@@ -4,7 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
+<<<<<<< HEAD
 public class GUIsettings
 {
     public static JPanel loadSettings()
@@ -13,6 +15,15 @@ public class GUIsettings
         JPanel settingsPanel = new JPanel();
         settingsPanel.setLayout(new GridLayout(3,1));
         settingsPanel.setBackground(Color.cyan);
+=======
+public class GUIsettings {
+    public static JPanel loadSettings() throws IOException {
+        JFrame base =GUIBasic.loadhomeScreen();
+        JPanel settingpanel = new JPanel();
+        settingpanel.setLayout(new GridLayout(3,1));
+        settingpanel.setBackground(Color.cyan);
+
+>>>>>>> AlicesNewBranch
 
         //location settings bar goes here
         JPanel locationPan = new JPanel();
@@ -42,10 +53,21 @@ public class GUIsettings
         JButton backButton = new JButton();
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD
                 base.remove(settingsPanel);
                 base.add(GUIHome.loadHome());
                 base.invalidate();
                 base.revalidate();
+=======
+                try {
+                    base.remove(settingpanel);
+                    base.add(GUIHome.loadHome());
+                    base.invalidate();
+                    base.revalidate();
+                }catch (IOException r){
+                    r.printStackTrace();
+                }
+>>>>>>> AlicesNewBranch
             }
         });
         backPanelHolder[0].add(backButton);
