@@ -1,4 +1,4 @@
-package WeatherApp;
+
 
 import javax.swing.*;
 

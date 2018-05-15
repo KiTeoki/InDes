@@ -1,3 +1,4 @@
+
 public class ClothesPickingLogic {
     public static Clothes[] whatClothes(float temp,Weather weather ){
         Clothes items[] = {Clothes.TSHIRT, Clothes.TROUSERS,Clothes.TRAINERS}; //0 is top, 1 is bottom, 2 is shoes
