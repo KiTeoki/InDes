@@ -1,3 +1,4 @@
+package WeatherApp;
 //JSON compatibility imports
 import org.json.JSONArray;
 import org.json.JSONObject;

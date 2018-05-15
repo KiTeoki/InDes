@@ -1,3 +1,5 @@
+package WeatherApp;
+
 import java.util.ArrayList;
 
 public class WeatherElement {

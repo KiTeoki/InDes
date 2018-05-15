@@ -1,4 +1,3 @@
-
 package WeatherApp;
 
 import javax.imageio.ImageIO;
