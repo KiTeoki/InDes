@@ -1,4 +1,4 @@
-Added package declaratoin
+package WeatherApp;
 
 import javax.swing.*;
 
