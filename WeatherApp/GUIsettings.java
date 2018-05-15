@@ -53,12 +53,10 @@ public class GUIsettings {
         JButton backButton = new JButton();
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
                 base.remove(settingsPanel);
                 base.add(GUIHome.loadHome());
                 base.invalidate();
                 base.revalidate();
-=======
                 try {
                     base.remove(settingpanel);
                     base.add(GUIHome.loadHome());
@@ -67,7 +65,6 @@ public class GUIsettings {
                 }catch (IOException r){
                     r.printStackTrace();
                 }
->>>>>>> AlicesNewBranch
             }
         });
         backPanelHolder[0].add(backButton);

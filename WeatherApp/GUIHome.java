@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 package WeatherApp;
 
 import javax.imageio.ImageIO;
@@ -17,11 +16,8 @@ public class GUIHome {
         JFrame base =GUIBasic.loadhomeScreen();
         JPanel homepanel = new JPanel();
         homepanel.setLayout(new GridLayout(3,1));
-<<<<<<< HEAD
 
-=======
         //tempriture bar goes here
->>>>>>> AlicesNewBranch
         JPanel tempPan = new JPanel();
         tempPan.setBackground(Color.cyan);
         JLabel tempLabel = new JLabel("Wow this is the Temperature", SwingConstants.CENTER);
