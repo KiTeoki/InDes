@@ -26,6 +26,7 @@ public class GUIHome {
     }
 
     public static JPanel loadHome() throws IOException {
+
         JFrame base =GUIBasic.loadhomeScreen();
         JPanel homepanel = new JPanel();
         homepanel.setLayout(new GridLayout(3,1));
