@@ -8,6 +8,7 @@ public class GUIHome {
         JFrame base =GUIBasic.loadhomeScreen();
         JPanel homepanel = new JPanel();
         homepanel.setLayout(new GridLayout(3,1));
+
         //tempriture bar goes here
         JPanel tempPan = new JPanel();
         tempPan.setBackground(Color.cyan);
