@@ -1,0 +1,4 @@
+package WeatherApp;
+public enum Clothes {
+    TSHIRT, RAINCOAT, JACKET, WARMCOAT, SHORTS, TROUSERS, TRAINERS, RAINBOOTS, FLIPFLOP;
+}
