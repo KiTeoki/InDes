@@ -1,21 +1,20 @@
 package WeatherApp;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class GUIHome {
-    public static JPanel loadHome(){
+    public static JPanel loadHome() throws IOException {
         JFrame base =GUIBasic.loadhomeScreen();
         JPanel homepanel = new JPanel();
         homepanel.setLayout(new GridLayout(3,1));
-<<<<<<< HEAD
-
         //tempriture bar goes here
-=======
-        //Temperature bar goes here
->>>>>>> Tudor
         JPanel tempPan = new JPanel();
         tempPan.setBackground(Color.cyan);
         JLabel tempLabel = new JLabel("Wow this is the Temperature", SwingConstants.CENTER);
@@ -30,13 +29,23 @@ public class GUIHome {
                 settingsBar.add(settingspanelHolder[m]);
         }
 
-        JButton settings = new JButton();
+
+        JButton settings = new JButton(new ImageIcon(((new ImageIcon("Res/SettingsButon.png")).getImage()).getScaledInstance(15, 15, java.awt.Image.SCALE_SMOOTH)));
+
+        //removes back ground and border of button so its just image
+        settings.setBorder(BorderFactory.createEmptyBorder());
+        settings.setContentAreaFilled(false);
+
         settings.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                base.remove(homepanel);
-                base.add(GUIsettings.loadSettings());
-                base.invalidate();
-                base.revalidate();
+                try {
+                    base.remove(homepanel);
+                    base.add(GUIsettings.loadSettings());
+                    base.invalidate();
+                    base.revalidate();
+                }catch (IOException r){
+                    r.printStackTrace();
+                }
             }
         });
         settingspanelHolder[4].add(settings);
