@@ -27,6 +27,16 @@ public class APIInterface {
         }
     }
 
+    //return list of all available cities
+    public ArrayList<String> getCityList(){
+        ArrayList<String> cities = new ArrayList<>();
+        for (int i=0; i<cityList.length(); i++) {
+            JSONObject curCity = cityList.getJSONObject(i);
+            cities.add(curCity.getString("name"));
+        }
+        return cities;
+    }
+
     //Look for location 'loc' in the valid locations file and return all matching IDs
     private ArrayList<Integer> searchFile(String loc) {
         //search for Location as lowercase
@@ -62,6 +72,7 @@ public class APIInterface {
         }
     }
 
+    //Take OpenWeatherAPI code and return Weather ENUM
     private Weather interpretCode(int code){
         if (code<300) return Weather.THUNDER;
         else if (code<600) return Weather.RAINY;
@@ -73,6 +84,7 @@ public class APIInterface {
         else return Weather.CLOUD;
     }
 
+    //Get 5 day forecast, split into daily lists of 3-hourly weather/temp forecasts
     public ArrayList<ArrayList<WeatherElement>> getWeather() throws IOException{
         URL apiCall = new URL("http://api.openweathermap.org/data/2.5/forecast?id=" + location + "&APPID=" + token);
         URLConnection conn = apiCall.openConnection();
@@ -108,7 +120,10 @@ public class APIInterface {
         APIInterface t = new APIInterface();
         //Test api call used: Cambridge
         //http://api.openweathermap.org/data/2.5/forecast?id=6240770&APPID=177fdc70ad38a8d70ae1b7ef94eb29b2
-        t.setLocation("Cambridge");
+
+        //System.out.print(t.getCityList());
+
+        /*t.setLocation("Cambridge");
         try {
             ArrayList<ArrayList<WeatherElement>> f = t.getWeather();
             int i=0;
@@ -121,6 +136,6 @@ public class APIInterface {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 }
