@@ -10,6 +10,21 @@ import java.io.File;
 import java.io.IOException;
 
 public class GUIHome {
+
+    //Method to display an image in the Jpanel jp, following graphics url, with a division scale against window width
+    public static void DisplayImage(JPanel jp, String url, int scale) {
+        JLabel jl = new JLabel();
+        ImageIcon icon = new javax.swing.ImageIcon(url);
+        Image temp = icon.getImage();
+
+        //Scale image to the width of window screen divided by scale. Scale height to preserve aspect ratio of image.
+        ImageIcon scaledicon = new ImageIcon(temp.getScaledInstance((int) GUIBasic.frame.getWidth() / scale, (int) Math.round((icon.getIconHeight()*GUIBasic.frame.getWidth())/(scale*icon.getIconWidth())), Image.SCALE_SMOOTH));
+
+        jl.setIcon(scaledicon);
+        jl.setHorizontalAlignment(JLabel.CENTER);
+        jp.add(BorderLayout.CENTER,jl);
+    }
+
     public static JPanel loadHome() throws IOException {
         JFrame base =GUIBasic.loadhomeScreen();
         JPanel homepanel = new JPanel();
@@ -18,16 +33,16 @@ public class GUIHome {
         //tempriture bar goes here
         JPanel tempPan = new JPanel();
         tempPan.setBackground(Color.cyan);
-        JLabel tempLabel = new JLabel("Wow this is the Temperature", SwingConstants.CENTER);
+        DisplayImage(tempPan, "Res/therm.png", 2);
         JPanel settingsBar = new JPanel();
         settingsBar.setBackground(Color.cyan);
         settingsBar.setLayout(new GridLayout(1,5));
         JPanel[] settingspanelHolder = new JPanel[5];
 
         for(int m = 0; m < 5; m++) {
-                settingspanelHolder[m] = new JPanel();
-                settingspanelHolder[m].setBackground(Color.cyan);
-                settingsBar.add(settingspanelHolder[m]);
+            settingspanelHolder[m] = new JPanel();
+            settingspanelHolder[m].setBackground(Color.cyan);
+            settingsBar.add(settingspanelHolder[m]);
         }
 
 
@@ -54,21 +69,18 @@ public class GUIHome {
         tempPan.setLayout(new GridLayout(2,1));
         //the top block contains the settingsBar and...
         tempPan.add(settingsBar);
-        //the bottom, the label
-        tempPan.add(BorderLayout.CENTER, tempLabel);
+
 
         //logo pannel
         JPanel logoPan = new JPanel();
         logoPan.setBackground(Color.cyan);
-        JLabel logoLabel = new JLabel("Wow this is the sun its hot");
-        logoPan.add(logoLabel);
+        DisplayImage(logoPan, "Res/Sunny.png", 2);
 
         //this will be the clothes bar
         JPanel clothesPan = new JPanel();
         clothesPan.setBackground(Color.cyan);
-        JLabel clothesLabel = new JLabel("wow flipflops");
-        clothesPan.add(clothesLabel);
-
+        DisplayImage(clothesPan, "Res/flipflops.png", 4);
+        DisplayImage(clothesPan, "Res/tshirt.png", 4);
 
         homepanel.add(tempPan);
         homepanel.add(logoPan);
