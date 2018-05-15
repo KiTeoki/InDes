@@ -26,7 +26,10 @@ public class GUIHome {
         JButton settings = new JButton();
         settings.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                GUIsettings.loadSettings();
+                base.remove(homepanel);
+                base.add(GUIsettings.loadSettings());
+                base.invalidate();
+                base.revalidate();
             }
         });
         settingspanelHolder[4].add(settings);
