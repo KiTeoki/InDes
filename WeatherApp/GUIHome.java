@@ -1,10 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GUIHome {
-    public static void loadHome(){
+    public static JPanel loadHome(){
         JFrame base =GUIBasic.loadhomeScreen();
-
+        JPanel homepanel = new JPanel();
+        homepanel.setLayout(new GridLayout(3,1));
         //tempriture bar goes here
         JPanel tempPan = new JPanel();
         tempPan.setBackground(Color.cyan);
@@ -16,10 +19,16 @@ public class GUIHome {
 
         for(int m = 0; m < 5; m++) {
                 settingspanelHolder[m] = new JPanel();
+                settingspanelHolder[m].setBackground(Color.cyan);
                 settingsBar.add(settingspanelHolder[m]);
         }
 
-        JButton settings = new JButton("*");
+        JButton settings = new JButton();
+        settings.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                GUIsettings.loadSettings();
+            }
+        });
         settingspanelHolder[4].add(settings);
 
         tempPan.add(BorderLayout.NORTH,settingsBar);
@@ -38,10 +47,10 @@ public class GUIHome {
         clothesPan.add(clothesLabel);
 
 
-        base.getContentPane().add(tempPan);
-        base.getContentPane().add(logoPan);
-        base.getContentPane().add(clothesPan);
-        base.setVisible(true);
+        homepanel.add(tempPan);
+        homepanel.add(logoPan);
+        homepanel.add(clothesPan);
+        return homepanel;
 
     }
 
