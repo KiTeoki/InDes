@@ -1,3 +1,4 @@
+package WeatherApp;
 
 public class ClothesPickingLogic {
     public static Clothes[] whatClothes(float temp,Weather weather ){

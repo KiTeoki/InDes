@@ -6,25 +6,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-<<<<<<< HEAD
+
 public class GUIsettings
 {
-    public static JPanel loadSettings()
-    {
+    public static JPanel loadSettings() throws IOException    {
         JFrame base = GUIBasic.loadhomeScreen();
         JPanel settingsPanel = new JPanel();
         settingsPanel.setLayout(new GridLayout(3,1));
         settingsPanel.setBackground(Color.cyan);
-=======
-public class GUIsettings {
-    public static JPanel loadSettings() throws IOException {
-        JFrame base =GUIBasic.loadhomeScreen();
-        JPanel settingpanel = new JPanel();
-        settingpanel.setLayout(new GridLayout(3,1));
-        settingpanel.setBackground(Color.cyan);
-
->>>>>>> AlicesNewBranch
-
         //location settings bar goes here
         JPanel locationPan = new JPanel();
         locationPan.setBackground(Color.cyan);
@@ -34,7 +23,7 @@ public class GUIsettings {
 
         JComboBox cityList = new JComboBox(cityStrings);
 //        cityList.setSelectedIndex(4);
-        cityList.addActionListener(new CitySelectionListener());
+      //  cityList.addActionListener(new CitySelectionListener());
 
         locationPan.add(cityList, BorderLayout.CENTER);
 
@@ -53,12 +42,8 @@ public class GUIsettings {
         JButton backButton = new JButton();
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                base.remove(settingsPanel);
-                base.add(GUIHome.loadHome());
-                base.invalidate();
-                base.revalidate();
                 try {
-                    base.remove(settingpanel);
+                    base.remove(settingsPanel);
                     base.add(GUIHome.loadHome());
                     base.invalidate();
                     base.revalidate();
