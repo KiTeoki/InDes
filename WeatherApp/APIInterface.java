@@ -19,6 +19,7 @@ public class APIInterface {
     private JSONArray cityList;
 
     public APIInterface() {
+        //Load JSON of cities
         try {
             //open file, tokenise, interpret as JSONArray, close file
             FileReader cityListFile = new FileReader("WeatherApp/city.list.min.json");
@@ -27,6 +28,29 @@ public class APIInterface {
             cityListFile.close();
         } catch (IOException e) {
             System.out.println("City list file not found");
+        }
+        //Read current location from file
+        File currentCityFile = new File("WeatherApp/config.txt");
+        try {
+            FileReader cityFileReader = new FileReader(currentCityFile);
+            BufferedReader cityIDReader = new BufferedReader(cityFileReader);
+            this.location=Integer.valueOf(cityIDReader.readLine());
+            cityIDReader.close();
+            cityFileReader.close();
+        } catch (IOException e) {
+            //could not load location file, make new file and set location (default london)
+            try {
+                currentCityFile.createNewFile();
+                FileWriter w = new FileWriter(currentCityFile);
+                w.write("2643743");
+                w.close();
+            } catch (IOException e2) {
+                //Cannot create new file as already exists, which would mean the first test passed.
+                //Case cannot occur but must be caught.
+            } finally {
+                //Make sure location does get set
+                this.location = 2643743;
+            }
         }
     }
 
@@ -64,7 +88,7 @@ public class APIInterface {
             }
         }
         if (perfectMatch!=-1) return perfectMatch;
-            //If no perfect match (multiple partial matches / no matches) throw exception with list of partial matches
+        //If no perfect match (multiple partial matches / no matches) throw exception with list of partial matches
         else throw new LocationSearchException(matchingLocations);
     }
 
@@ -124,7 +148,6 @@ public class APIInterface {
         //System.out.print(t.getCityList());
 
         try {
-            t.setLocation("Cambridge");
             ArrayList<ArrayList<WeatherElement>> f = t.getWeather();
             int i=0;
             for (ArrayList dailyWeather : f) {
