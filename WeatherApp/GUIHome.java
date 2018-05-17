@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class GUIHome {
 
@@ -25,10 +26,29 @@ public class GUIHome {
         jp.add(BorderLayout.CENTER,jl);
     }
 
+    public static void loadfont() {
+
+    }
+
+    //Method to read in font and print file
+    public static void printtext(JPanel panel, String n, Font f) {
+        JLabel label = new JLabel();
+        label.setFont(f);
+        label.setText(n);
+        panel.add(BorderLayout.CENTER, label);
+    }
+
+
     public static JPanel loadHome() throws IOException {
         JFrame base =GUIBasic.loadhomeScreen();
         JPanel homepanel = new JPanel();
         homepanel.setLayout(new GridLayout(3,1));
+
+        //To load font
+        InputStream is = GUIHome.class.getResourceAsStream("font.ttf");
+        Font font = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(16f);
+        //Example
+        printtext(homepanel, "This is a test", font);
 
         //tempriture bar goes here
         JPanel tempPan = new JPanel();
