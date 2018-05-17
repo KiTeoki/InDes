@@ -94,8 +94,21 @@ public class APIInterface {
 
     //Lookup in file, set id to number found. Pass error up if not found, or if not specific enough.
     public void setLocation(String newLoc) throws LocationSearchException {
+        //get ID
         int matchID = this.searchFile(newLoc);
-        location = Integer.valueOf(matchID);
+        try {
+            //Update config.txt with new location
+            File currentCityFile = new File("WeatherApp/config.txt");
+            //make file if it does not exist
+            currentCityFile.createNewFile();
+            FileWriter w = new FileWriter(currentCityFile);
+            w.write(String.valueOf(matchID));
+            w.close();
+        } catch (IOException e) {
+            //could not write to file
+        } finally {
+            location = Integer.valueOf(matchID);
+        }
     }
 
     //Take OpenWeatherAPI code and return Weather ENUM
