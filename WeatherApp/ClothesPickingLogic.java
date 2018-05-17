@@ -3,7 +3,7 @@ package WeatherApp;
 public class ClothesPickingLogic {
     public static Clothes[] whatClothes(WeatherElement weEl){
         Weather weather = weEl.getWeather();
-        float temp = weEl.getTemp();
+        double temp = weEl.getTemp();
 
         Clothes items[] = {Clothes.TSHIRT, Clothes.TROUSERS,Clothes.TRAINERS}; //0 is top, 1 is bottom, 2 is shoes
         //top logic
