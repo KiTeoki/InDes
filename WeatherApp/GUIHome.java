@@ -87,16 +87,16 @@ public class GUIHome {
 
         //tempriture bar goes here
         JPanel tempPan = new JPanel();
-        tempPan.setBackground(Color.cyan);
+        tempPan.setBackground(Color.decode("#8bb1ed"));
         DisplayImage(tempPan, tempToFile(temp), 2);
         JPanel settingsBar = new JPanel();
-        settingsBar.setBackground(Color.cyan);
+        settingsBar.setBackground(Color.decode("#8bb1ed"));
         settingsBar.setLayout(new GridLayout(1,5));
         JPanel[] settingspanelHolder = new JPanel[5];
 
         for(int m = 0; m < 5; m++) {
             settingspanelHolder[m] = new JPanel();
-            settingspanelHolder[m].setBackground(Color.cyan);
+            settingspanelHolder[m].setBackground(Color.decode("#8bb1ed"));
             settingsBar.add(settingspanelHolder[m]);
         }
 
@@ -128,12 +128,12 @@ public class GUIHome {
 
         //logo pannel
         JPanel logoPan = new JPanel();
-        logoPan.setBackground(Color.cyan);
+        logoPan.setBackground(Color.decode("#8bb1ed"));
         DisplayImage(logoPan, "Res/Sunny.png", 2);
 
         //this will be the clothes bar
         JPanel clothesPan = new JPanel();
-        clothesPan.setBackground(Color.cyan);
+        clothesPan.setBackground(Color.decode("#8bb1ed"));
         DisplayImage(clothesPan, "Res/flipflops.png", 4);
         DisplayImage(clothesPan, "Res/tshirt.png", 4);
 

@@ -1,6 +1,6 @@
 package WeatherApp;
-//JSON compatibility imports
 
+//JSON compatibility imports
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -51,16 +51,6 @@ public class APIInterface {
         int perfectMatch = -1;
         for (int i=0; i<cityList.length(); i++) {
             JSONObject curCity = cityList.getJSONObject(i);
-<<<<<<< HEAD
-            if ((curCity.getString("name").toLowerCase().equals(sfLoc))&&(curCity.getString("country").equals("GB"))){
-                //Exact location so can stop searching here
-                matchingLocations = new ArrayList<>();
-                matchingLocations.add(Integer.valueOf(curCity.getInt("id")));
-                break;
-            } else if ((curCity.getString("name").toLowerCase().contains(sfLoc))&&(curCity.getString("country").equals("GB"))){
-                //Close match so add in case no exact match found
-                matchingLocations.add(Integer.valueOf(curCity.getInt("id")));
-=======
             //Filter by GB only
             if (curCity.getString("country").equals("GB")) {
                 if (curCity.getString("name").toLowerCase().equals(sfLoc)) {
@@ -71,11 +61,10 @@ public class APIInterface {
                     //Close match so add in case no exact match found
                     matchingLocations.add(curCity.getString("name"));
                 }
->>>>>>> b751880a2530613639cb50c38e73e46028d3072e
             }
         }
         if (perfectMatch!=-1) return perfectMatch;
-        //If no perfect match (multiple partial matches / no matches) throw exception with list of partial matches
+            //If no perfect match (multiple partial matches / no matches) throw exception with list of partial matches
         else throw new LocationSearchException(matchingLocations);
     }
 
@@ -134,8 +123,8 @@ public class APIInterface {
         //See result of cityList
         //System.out.print(t.getCityList());
 
-        /*try {
-            t.setLocation("Cam");
+        try {
+            t.setLocation("Cambridge");
             ArrayList<ArrayList<WeatherElement>> f = t.getWeather();
             int i=0;
             for (ArrayList dailyWeather : f) {
@@ -149,6 +138,6 @@ public class APIInterface {
             System.out.println(e.getMatchingCities());
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
+        }
     }
 }
