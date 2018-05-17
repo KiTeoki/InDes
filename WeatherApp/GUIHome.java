@@ -28,6 +28,34 @@ public class GUIHome {
         jl.setHorizontalAlignment(JLabel.CENTER);
         jp.add(BorderLayout.CENTER,jl);
     }
+
+    public static String clothesEnumToFile(Clothes c) {
+        switch(c) {
+            case TSHIRT:
+                return "Res/tshirt.png";
+            case RAINCOAT:
+                return "Res/umbrella.png";
+            case JACKET:
+                return "Res/jumper.png";
+            case WARMCOAT:
+                return "Res/coat.png";
+            case SHORTS:
+                return "Res/shorts.png";
+            case TROUSERS:
+                return "Res/jeans.png";
+            case TRAINERS:
+                return "Res/wellies.png";
+            case RAINBOOTS:
+                return "Res/wellies.png";
+            case FLIPFLOP:
+                return "Res/flipflops.png";
+        }
+        return "Res/tshirt.png";
+    }
+
+
+
+
     public static String weatherEnumToFile(Weather weather){
         switch(weather){
             case SUNNY:
@@ -165,7 +193,7 @@ public class GUIHome {
         //logo pannel
         JPanel logoPan = new JPanel();
         logoPan.setBackground(Color.decode("#8bb1ed"));
-        DisplayImage(logoPan, weatherEnumToFile(weatherForSelectedDay.getWeather()), 2.3);
+        DisplayImage(logoPan, weatherEnumToFile(weatherForSelectedDay.getWeather()), 2.25);
 
         //day and clothes panel
         JPanel dayClothes = new JPanel();
@@ -175,7 +203,7 @@ public class GUIHome {
         dayPanel.setBackground(Color.decode("#8bb1ed"));
         //make left button
         if(day != 0){
-            JButton left = new JButton(new ImageIcon(((new ImageIcon("Res/buttonleft.png")).getImage()).getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH)));
+            JButton left = new JButton(new ImageIcon(((new ImageIcon("Res/buttonleft.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
 
             //removes back ground and border of button so its just image
             left.setBorder(BorderFactory.createEmptyBorder());
@@ -200,7 +228,7 @@ public class GUIHome {
 
         //make right button
         if(day != 4){
-            JButton right = new JButton(new ImageIcon(((new ImageIcon("Res/rightbutton.png")).getImage()).getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH)));
+            JButton right = new JButton(new ImageIcon(((new ImageIcon("Res/rightbutton.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
 
             //removes back ground and border of button so its just image
             right.setBorder(BorderFactory.createEmptyBorder());
@@ -223,8 +251,9 @@ public class GUIHome {
         //this will be the clothes bar
         JPanel clothesPan = new JPanel();
         clothesPan.setBackground(Color.decode("#8bb1ed"));
-        DisplayImage(clothesPan, "Res/flipflops.png", 5);
-        DisplayImage(clothesPan, "Res/tshirt.png", 5);
+        DisplayImage(clothesPan, clothesEnumToFile(items[0]), 7);
+        DisplayImage(clothesPan, clothesEnumToFile(items[1]), 7);
+        DisplayImage(clothesPan, clothesEnumToFile(items[2]), 7);
 
 // add to panels to dayclothes panel
         dayClothes.add(dayPanel);
