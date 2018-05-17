@@ -35,19 +35,23 @@ public class APIInterface {
         ArrayList<String> cities = new ArrayList<>();
         for (int i=0; i<cityList.length(); i++) {
             JSONObject curCity = cityList.getJSONObject(i);
-            cities.add(curCity.getString("name"));
+            if (curCity.getString("country").equals("GB"))
+                cities.add(curCity.getString("name"));
         }
         return cities;
     }
 
-    //Look for location 'loc' in the valid locations file and return all matching IDs
-    private ArrayList<Integer> searchFile(String loc) {
+    //Look for location 'loc' in the valid locations file
+    //Either returns the matching ID or throws an exception with list of similar city names
+    private int searchFile(String loc) throws LocationSearchException{
         //search for Location as lowercase
         String sfLoc = loc.toLowerCase();
         //Initialise array of locations that match input (may be multiple if not whole location name given)
-        ArrayList<Integer> matchingLocations = new ArrayList<>();
+        ArrayList<String> matchingLocations = new ArrayList<>();
+        int perfectMatch = -1;
         for (int i=0; i<cityList.length(); i++) {
             JSONObject curCity = cityList.getJSONObject(i);
+<<<<<<< HEAD
             if ((curCity.getString("name").toLowerCase().equals(sfLoc))&&(curCity.getString("country").equals("GB"))){
                 //Exact location so can stop searching here
                 matchingLocations = new ArrayList<>();
@@ -56,23 +60,29 @@ public class APIInterface {
             } else if ((curCity.getString("name").toLowerCase().contains(sfLoc))&&(curCity.getString("country").equals("GB"))){
                 //Close match so add in case no exact match found
                 matchingLocations.add(Integer.valueOf(curCity.getInt("id")));
+=======
+            //Filter by GB only
+            if (curCity.getString("country").equals("GB")) {
+                if (curCity.getString("name").toLowerCase().equals(sfLoc)) {
+                    //Exact location so can stop searching here
+                    perfectMatch = curCity.getInt("id");
+                    break;
+                } else if (curCity.getString("name").toLowerCase().contains(sfLoc)) {
+                    //Close match so add in case no exact match found
+                    matchingLocations.add(curCity.getString("name"));
+                }
+>>>>>>> b751880a2530613639cb50c38e73e46028d3072e
             }
         }
-        return matchingLocations;
+        if (perfectMatch!=-1) return perfectMatch;
+        //If no perfect match (multiple partial matches / no matches) throw exception with list of partial matches
+        else throw new LocationSearchException(matchingLocations);
     }
 
-    //Lookup in file, set id to number found. Throw error if not found, or if not specific enough.
+    //Lookup in file, set id to number found. Pass error up if not found, or if not specific enough.
     public void setLocation(String newLoc) throws LocationSearchException {
-        ArrayList<Integer> matchingLocations = this.searchFile(newLoc);
-        //Validation: should have only 1 result
-        if (matchingLocations.size()==0){
-            throw new LocationSearchException(false);
-        } else if (matchingLocations.size()>1){
-            System.out.println(matchingLocations);
-            throw new LocationSearchException(true);
-        } else {
-            location = Integer.valueOf(matchingLocations.get(0));
-        }
+        int matchID = this.searchFile(newLoc);
+        location = Integer.valueOf(matchID);
     }
 
     //Take OpenWeatherAPI code and return Weather ENUM
@@ -121,13 +131,11 @@ public class APIInterface {
 
     public static void main(String[] args){
         APIInterface t = new APIInterface();
-        //Test api call used: Cambridge
-        //http://api.openweathermap.org/data/2.5/forecast?id=6240770&APPID=177fdc70ad38a8d70ae1b7ef94eb29b2
-
+        //See result of cityList
         //System.out.print(t.getCityList());
 
-        /*t.setLocation("Cambridge");
-        try {
+        /*try {
+            t.setLocation("Cam");
             ArrayList<ArrayList<WeatherElement>> f = t.getWeather();
             int i=0;
             for (ArrayList dailyWeather : f) {
@@ -137,6 +145,8 @@ public class APIInterface {
                     System.out.print(w.getWeather() + " | " + w.getTemp()+" , ");
                 }
             }
+        } catch (LocationSearchException e) {
+            System.out.println(e.getMatchingCities());
         } catch (Exception e) {
             e.printStackTrace();
         }*/
