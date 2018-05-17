@@ -48,12 +48,12 @@ public class APIInterface {
         ArrayList<Integer> matchingLocations = new ArrayList<>();
         for (int i=0; i<cityList.length(); i++) {
             JSONObject curCity = cityList.getJSONObject(i);
-            if (curCity.getString("name").toLowerCase().equals(sfLoc)){
+            if ((curCity.getString("name").toLowerCase().equals(sfLoc))&&(curCity.getString("country").equals("GB"))){
                 //Exact location so can stop searching here
                 matchingLocations = new ArrayList<>();
                 matchingLocations.add(Integer.valueOf(curCity.getInt("id")));
                 break;
-            } else if (curCity.getString("name").toLowerCase().contains(sfLoc)){
+            } else if ((curCity.getString("name").toLowerCase().contains(sfLoc))&&(curCity.getString("country").equals("GB"))){
                 //Close match so add in case no exact match found
                 matchingLocations.add(Integer.valueOf(curCity.getInt("id")));
             }

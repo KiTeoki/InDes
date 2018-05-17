@@ -15,7 +15,7 @@ public class WeatherElement {
     public Weather getWeather() {
         return mWeather;
     }
-    public float getTemp() {
-        return mTemp;
+    public double getTemp() {
+        return (mTemp- 273.15);
     }
 }
