@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class GUIsettings
 {
-    public static JPanel loadSettings() throws IOException
+    public static JPanel loadSettings(int day, String location) throws IOException
     {
         JFrame base = GUIBasic.loadhomeScreen();
         JPanel settingsPanel = new JPanel();
@@ -55,7 +55,7 @@ public class GUIsettings
         backButton.addActionListener(e -> {
             try {
                 base.remove(settingsPanel);
-                base.add(GUIHome.loadHome(0,"cambridge"));
+                base.add(GUIHome.loadHome(day,location));
                 base.invalidate();
                 base.revalidate();
             }catch(IOException r){

@@ -175,7 +175,7 @@ public class GUIHome {
             public void actionPerformed(ActionEvent e) {
                 try {
                     base.remove(homepanel);
-                    base.add(GUIsettings.loadSettings());
+                    base.add(GUIsettings.loadSettings(day,Location));
                     base.invalidate();
                     base.revalidate();
                 }catch (IOException r){
