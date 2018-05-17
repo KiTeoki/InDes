@@ -1,6 +1,7 @@
 package WeatherApp;
 
-
+import java.io.FileInputStream;
+import java.io.InputStream;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -14,13 +15,13 @@ import java.util.ArrayList;
 public class GUIHome {
 
     //Method to display an image in the Jpanel jp, following graphics url, with a division scale against window width
-    public static void DisplayImage(JPanel jp, String url, int scale) {
+    public static void DisplayImage(JPanel jp, String url, double scale) {
         JLabel jl = new JLabel();
         ImageIcon icon = new javax.swing.ImageIcon(url);
         Image temp = icon.getImage();
 
         //Scale image to the width of window screen divided by scale. Scale height to preserve aspect ratio of image.
-        ImageIcon scaledicon = new ImageIcon(temp.getScaledInstance((int) GUIBasic.frame.getWidth() / scale, (int) Math.round((icon.getIconHeight()*GUIBasic.frame.getWidth())/(scale*icon.getIconWidth())), Image.SCALE_SMOOTH));
+        ImageIcon scaledicon = new ImageIcon(temp.getScaledInstance( (int)Math.round(GUIBasic.frame.getWidth() / scale), (int) Math.round((icon.getIconHeight()*GUIBasic.frame.getWidth())/(scale*icon.getIconWidth())), Image.SCALE_SMOOTH));
 
         jl.setIcon(scaledicon);
         jl.setHorizontalAlignment(JLabel.CENTER);
@@ -30,6 +31,18 @@ public class GUIHome {
         switch(weather){
             case SUNNY:
                 return "Res/Sunny.png";
+            case RAINY:
+                return "Res/rainy.png";
+            case SNOWY:
+                return "Res/Snowy.png";
+            case THUNDER:
+                return "Res/thunder.png";
+            case WINDY:
+                return "Res/windy.png";
+            case SUNCLOUD:
+                return "Res/suncloud.png";
+            case CLOUD:
+                return "Res/cloudy.png";
         }
         return "Res/Sunny.png";
     }
@@ -65,6 +78,14 @@ public class GUIHome {
         }
     }
 
+    //Method to read in font and print file
+    public static void printtext(JPanel panel, String n, Font f) {
+        JLabel label = new JLabel();
+        label.setFont(f);
+        label.setText(n);
+        panel.add(BorderLayout.CENTER, label);
+    }
+
     public static JPanel loadHome(int day,String Location) throws IOException {
 
         // stuff for getting current weather
@@ -81,6 +102,17 @@ public class GUIHome {
         Clothes items[] =WeatherApp.ClothesPickingLogic.whatClothes(weatherForSelectedDay);
         double temp = weatherForSelectedDay.getTemp();
 
+        //To load font
+        InputStream is = new FileInputStream(new File("Res/font.ttf"));
+        Font font = null;
+        try {
+            Font tempfont = Font.createFont(Font.TRUETYPE_FONT, is);
+            font = tempfont.deriveFont(30f);
+        } catch (FontFormatException e) {
+            e.printStackTrace();
+        }
+
+
         JFrame base =GUIBasic.loadhomeScreen();
         JPanel homepanel = new JPanel();
         homepanel.setLayout(new GridLayout(3,1));
@@ -88,7 +120,10 @@ public class GUIHome {
         //tempriture bar goes here
         JPanel tempPan = new JPanel();
         tempPan.setBackground(Color.decode("#8bb1ed"));
-        DisplayImage(tempPan, tempToFile(temp), 2);
+        JPanel imaPanel = new JPanel();
+        imaPanel.setBackground(Color.decode("#8bb1ed"));
+        printtext(imaPanel,(Math.round(temp)+"\u00b0 C"),font);
+        DisplayImage(imaPanel, tempToFile(temp), 1.5);
         JPanel settingsBar = new JPanel();
         settingsBar.setBackground(Color.decode("#8bb1ed"));
         settingsBar.setLayout(new GridLayout(1,5));
@@ -121,25 +156,40 @@ public class GUIHome {
         });
         settingspanelHolder[4].add(settings);
 
-        tempPan.setLayout(new GridLayout(2,1));
         //the top block contains the settingsBar and...
-        tempPan.add(settingsBar);
+        tempPan.add(settingsBar, BorderLayout.NORTH);
+        tempPan.add(imaPanel,BorderLayout.CENTER);
 
 
         //logo pannel
         JPanel logoPan = new JPanel();
         logoPan.setBackground(Color.decode("#8bb1ed"));
-        DisplayImage(logoPan, "Res/Sunny.png", 2);
+        DisplayImage(logoPan, weatherEnumToFile(weatherForSelectedDay.getWeather()), 2.3);
+
+        //day and clothes panel
+        JPanel dayClothes = new JPanel();
+        dayClothes.setLayout(new GridLayout(2,1));
+
+        JPanel dayPanel = new JPanel();
+        dayPanel.setBackground(Color.decode("#8bb1ed"));
+        //Example
+        DisplayImage(dayPanel, "Res/buttonleft.png", 6);
+        printtext(dayPanel, " Today ", font);
+        DisplayImage(dayPanel, "Res/rightbutton.png", 6);
 
         //this will be the clothes bar
         JPanel clothesPan = new JPanel();
         clothesPan.setBackground(Color.decode("#8bb1ed"));
-        DisplayImage(clothesPan, "Res/flipflops.png", 4);
-        DisplayImage(clothesPan, "Res/tshirt.png", 4);
+        DisplayImage(clothesPan, "Res/flipflops.png", 5);
+        DisplayImage(clothesPan, "Res/tshirt.png", 5);
+
+// add to panels to dayclothes panel
+        dayClothes.add(dayPanel);
+        dayClothes.add(clothesPan);
 
         homepanel.add(tempPan);
         homepanel.add(logoPan);
-        homepanel.add(clothesPan);
+        homepanel.add(dayClothes);
         return homepanel;
 
     }
