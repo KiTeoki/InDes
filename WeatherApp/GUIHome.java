@@ -136,7 +136,7 @@ public class GUIHome {
         Font font = null;
         try {
             Font tempfont = Font.createFont(Font.TRUETYPE_FONT, is);
-            font = tempfont.deriveFont(30f);
+            font = tempfont.deriveFont(28f);
         } catch (FontFormatException e) {
             e.printStackTrace();
         }
@@ -201,6 +201,7 @@ public class GUIHome {
 
         JPanel dayPanel = new JPanel();
         dayPanel.setBackground(Color.decode("#8bb1ed"));
+
         //make left button
         if(day != 0){
             JButton left = new JButton(new ImageIcon(((new ImageIcon("Res/buttonleft.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
@@ -221,10 +222,10 @@ public class GUIHome {
                     }
                 }
             });
-            dayPanel.add(left,BorderLayout.CENTER);
+            dayPanel.add(left,BorderLayout.WEST);
         }
 
-        printtext(dayPanel, " Today ", font);
+        printtext(dayPanel, Day.getDay(day), font);
 
         //make right button
         if(day != 4){
@@ -246,7 +247,7 @@ public class GUIHome {
                     }
                 }
             });
-            dayPanel.add(right,BorderLayout.CENTER);
+            dayPanel.add(right,BorderLayout.EAST);
         }
         //this will be the clothes bar
         JPanel clothesPan = new JPanel();
