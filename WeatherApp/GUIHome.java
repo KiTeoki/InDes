@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class GUIHome {
+    public static APIInterface apii = new APIInterface();
 
     //Method to display an image in the Jpanel jp, following graphics url, with a division scale against window width
     public static void DisplayImage(JPanel jp, String url, double scale) {
@@ -89,7 +90,7 @@ public class GUIHome {
     public static JPanel loadHome(int day,String Location) throws IOException {
 
         // stuff for getting current weather
-        APIInterface apii = new APIInterface();
+
         apii.setLocation(Location);
         ArrayList<ArrayList<WeatherElement>> forecast = apii.getWeather();
         //defults to current time
@@ -172,11 +173,53 @@ public class GUIHome {
 
         JPanel dayPanel = new JPanel();
         dayPanel.setBackground(Color.decode("#8bb1ed"));
-        //Example
-        DisplayImage(dayPanel, "Res/buttonleft.png", 6);
-        printtext(dayPanel, " Today ", font);
-        DisplayImage(dayPanel, "Res/rightbutton.png", 6);
+        //make left button
+        if(day != 0){
+            JButton left = new JButton(new ImageIcon(((new ImageIcon("Res/buttonleft.png")).getImage()).getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH)));
 
+            //removes back ground and border of button so its just image
+            left.setBorder(BorderFactory.createEmptyBorder());
+            left.setContentAreaFilled(false);
+
+            left.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        base.remove(homepanel);
+                        base.add(GUIHome.loadHome(day-1,Location));
+                        base.invalidate();
+                        base.revalidate();
+                    }catch (IOException r){
+                        r.printStackTrace();
+                    }
+                }
+            });
+            dayPanel.add(left,BorderLayout.CENTER);
+        }
+
+        printtext(dayPanel, " Today ", font);
+
+        //make right button
+        if(day != 4){
+            JButton right = new JButton(new ImageIcon(((new ImageIcon("Res/rightbutton.png")).getImage()).getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH)));
+
+            //removes back ground and border of button so its just image
+            right.setBorder(BorderFactory.createEmptyBorder());
+            right.setContentAreaFilled(false);
+
+            right.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        base.remove(homepanel);
+                        base.add(GUIHome.loadHome(day+1,Location));
+                        base.invalidate();
+                        base.revalidate();
+                    }catch (IOException r){
+                        r.printStackTrace();
+                    }
+                }
+            });
+            dayPanel.add(right,BorderLayout.CENTER);
+        }
         //this will be the clothes bar
         JPanel clothesPan = new JPanel();
         clothesPan.setBackground(Color.decode("#8bb1ed"));
