@@ -55,7 +55,7 @@ public class GUIsettings
         backButton.addActionListener(e -> {
             try {
                 base.remove(settingsPanel);
-                base.add(GUIHome.loadHome());
+                base.add(GUIHome.loadHome(0,"cambridge"));
                 base.invalidate();
                 base.revalidate();
             }catch(IOException r){

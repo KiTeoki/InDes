@@ -1,5 +1,6 @@
 package WeatherApp;
 
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -8,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class GUIHome {
 
@@ -24,8 +26,60 @@ public class GUIHome {
         jl.setHorizontalAlignment(JLabel.CENTER);
         jp.add(BorderLayout.CENTER,jl);
     }
+    public static String weatherEnumToFile(Weather weather){
+        switch(weather){
+            case SUNNY:
+                return "Res/Sunny.png";
+        }
+        return "Res/Sunny.png";
+    }
+    public static String tempToFile(double temp){
+        if (temp<-5.0){
+            return "Res/therm14.png";
+        }else if (temp <0){
+            return "Res/therm13.png";
+        }else if (temp <5){
+            return "Res/therm12.png";
+        }else if (temp <10){
+            return "Res/therm11.png";
+        }else if (temp<13){
+            return "Res/therm10.png";
+        }else if (temp < 15){
+            return "Res/therm9.png";
+        }else if (temp<18){
+            return "Res/therm8.png";
+        }else if (temp < 20){
+            return "Res/therm7.png";
+        }else if(temp<23){
+            return "Res/therm6.png";
+        }else if (temp<25){
+            return "Res/therm5.png";
+        }else if(temp<28){
+            return "Res/therm4.png";
+        }else if (temp<30){
+            return "Res/therm3.png";
+        }else if (temp <35){
+            return "Res/therm2.png";
+        }else{
+            return "Res/therm1.png";
+        }
+    }
 
-    public static JPanel loadHome() throws IOException {
+    public static JPanel loadHome(int day,String Location) throws IOException {
+
+        // stuff for getting current weather
+        APIInterface apii = new APIInterface();
+        apii.setLocation(Location);
+        ArrayList<ArrayList<WeatherElement>> forecast = apii.getWeather();
+        //defults to current time
+        WeatherElement weatherForSelectedDay =forecast.get(0).get(0);
+        if(day!=0) {
+            //changes to midday for future days
+            weatherForSelectedDay = forecast.get(day).get(3);
+        }
+
+        Clothes items[] =WeatherApp.ClothesPickingLogic.whatClothes(weatherForSelectedDay);
+        double temp = weatherForSelectedDay.getTemp();
 
         JFrame base =GUIBasic.loadhomeScreen();
         JPanel homepanel = new JPanel();
@@ -34,7 +88,7 @@ public class GUIHome {
         //tempriture bar goes here
         JPanel tempPan = new JPanel();
         tempPan.setBackground(Color.cyan);
-        DisplayImage(tempPan, "Res/therm.png", 2);
+        DisplayImage(tempPan, tempToFile(temp), 2);
         JPanel settingsBar = new JPanel();
         settingsBar.setBackground(Color.cyan);
         settingsBar.setLayout(new GridLayout(1,5));

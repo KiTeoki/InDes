@@ -7,14 +7,9 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String args[]) {
         try {
-            APIInterface apii = new APIInterface();
-            apii.setLocation("cambridge");
-            ArrayList<ArrayList<WeatherElement>> forecast = apii.getWeather();
-            WeatherElement now = forecast.get(0).get(0);
-            Clothes items[] =WeatherApp.ClothesPickingLogic.whatClothes(now);
-            System.out.println(now.getTemp() +" "+items[0]+" "+ items[1] +" " + items[2]);
+
             JFrame base = GUIBasic.loadhomeScreen();
-            base.add(GUIHome.loadHome());
+            base.add(GUIHome.loadHome(1,"cambridge"));
             base.setVisible(true);
         }catch (IOException e){
             e.printStackTrace();
