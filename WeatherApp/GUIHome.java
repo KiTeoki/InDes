@@ -44,7 +44,7 @@ public class GUIHome {
             case TROUSERS:
                 return "Res/jeans.png";
             case TRAINERS:
-                return "Res/wellies.png";
+                return "Res/trainers.png";
             case RAINBOOTS:
                 return "Res/wellies.png";
             case FLIPFLOP:
@@ -52,8 +52,6 @@ public class GUIHome {
         }
         return "Res/tshirt.png";
     }
-
-
 
 
     public static String weatherEnumToFile(Weather weather){
