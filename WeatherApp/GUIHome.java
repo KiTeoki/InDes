@@ -13,9 +13,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class GUIHome {
-    //a static case of the api is created so it is only loaded once
-    public static APIInterface apii = new APIInterface();
-
     //Method to display an image in the Jpanel jp, following graphics url, with a division scale against window width
     private static void DisplayImage(JPanel jp, String url, double scale) {
         JLabel jl = new JLabel();
@@ -115,13 +112,9 @@ public class GUIHome {
         panel.add(BorderLayout.CENTER, label);
     }
 
-    // a method which loads the home page, it takes in the day as an int 0-4 where 0 is current day and location as a lower case string
-    public static JPanel loadHome(int day,String Location) throws IOException {
-
-        //Weather items set
-        //the location is set for the current version of the home page
-        apii.setLocation(Location);
-        //the weather for this location is fetched and called forecast
+    // a method which loads the home page, it takes in the day as an int 0-4 where 0 is current day
+    public static JPanel loadHome(int day, APIInterface apii) throws IOException {
+        //the weather for the current location is fetched and called forecast
         ArrayList<ArrayList<WeatherElement>> forecast = apii.getWeather();
         //defaults to current time on current day
         WeatherElement weatherForSelectedDay =forecast.get(0).get(0);
@@ -181,7 +174,7 @@ public class GUIHome {
             public void actionPerformed(ActionEvent e) {
                 try {
                     base.remove(homepanel);
-                    base.add(GUIsettings.loadSettings(day,Location));
+                    base.add(GUIsettings.loadSettings(day, apii));
                     base.invalidate();
                     base.revalidate();
                 }catch (IOException r){
@@ -196,7 +189,7 @@ public class GUIHome {
         tempPan.add(imaPanel,BorderLayout.CENTER);
 
 
-        //logo pannel
+        //logo panel
         JPanel logoPan = new JPanel();
         logoPan.setBackground(Color.decode("#8bb1ed"));
         DisplayImage(logoPan, weatherEnumToFile(weatherForSelectedDay.getWeather()), 2.25);
@@ -220,7 +213,7 @@ public class GUIHome {
                 public void actionPerformed(ActionEvent e) {
                     try {
                         base.remove(homepanel);
-                        base.add(GUIHome.loadHome(day-1,Location));
+                        base.add(GUIHome.loadHome(day-1, apii));
                         base.invalidate();
                         base.revalidate();
                     }catch (IOException r){
@@ -245,7 +238,7 @@ public class GUIHome {
                 public void actionPerformed(ActionEvent e) {
                     try {
                         base.remove(homepanel);
-                        base.add(GUIHome.loadHome(day+1,Location));
+                        base.add(GUIHome.loadHome(day+1, apii));
                         base.invalidate();
                         base.revalidate();
                     }catch (IOException r){
@@ -262,7 +255,7 @@ public class GUIHome {
         DisplayImage(clothesPan, clothesEnumToFile(items[1]), 7);
         DisplayImage(clothesPan, clothesEnumToFile(items[2]), 7);
 
-// add to panels to dayclothes panel
+        // add to panels to dayclothes panel
         dayClothes.add(dayPanel);
         dayClothes.add(clothesPan);
 

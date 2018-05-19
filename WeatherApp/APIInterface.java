@@ -11,6 +11,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class APIInterface {
     //API token, current location, cached version of the cityList array
@@ -62,6 +63,7 @@ public class APIInterface {
             if (curCity.getString("country").equals("GB"))
                 cities.add(curCity.getString("name"));
         }
+        Collections.sort(cities);
         return cities;
     }
 
@@ -89,7 +91,10 @@ public class APIInterface {
         }
         if (perfectMatch!=-1) return perfectMatch;
         //If no perfect match (multiple partial matches / no matches) throw exception with list of partial matches
-        else throw new LocationSearchException(matchingLocations);
+        else {
+            Collections.sort(matchingLocations);
+            throw new LocationSearchException(matchingLocations);
+        }
     }
 
     //Lookup in file, set id to number found. Pass error up if not found, or if not specific enough.
@@ -153,27 +158,5 @@ public class APIInterface {
         //Add last day
         forecast.add(dailyWeather);
         return forecast;
-    }
-
-    public static void main(String[] args){
-        APIInterface t = new APIInterface();
-        //See result of cityList
-        //System.out.print(t.getCityList());
-
-        try {
-            ArrayList<ArrayList<WeatherElement>> f = t.getWeather();
-            int i=0;
-            for (ArrayList dailyWeather : f) {
-                System.out.println("\n Today + "+ i++ +" days");
-                for (int j=0;j<dailyWeather.size(); j++){
-                    WeatherElement w = (WeatherElement) dailyWeather.get(j);
-                    System.out.print(w.getWeather() + " | " + w.getTemp()+" , ");
-                }
-            }
-        } catch (LocationSearchException e) {
-            System.out.println(e.getMatchingCities());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }
