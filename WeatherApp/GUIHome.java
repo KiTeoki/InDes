@@ -147,6 +147,7 @@ public class GUIHome {
         //a panel called tempan is created this will be the top 1/3 of the screen and will contain temperature information
         JPanel tempPan = new JPanel();
         tempPan.setBackground(Color.decode("#8bb1ed"));
+        tempPan.setLayout(new BorderLayout());
         //image panel will go in tempPan and holds the tempture and tempreture bar
         JPanel imaPanel = new JPanel();
         imaPanel.setBackground(Color.decode("#8bb1ed"));
@@ -154,21 +155,15 @@ public class GUIHome {
         DisplayImage(imaPanel, tempToFile(temp), 1.5);
         JPanel settingsBar = new JPanel();
         settingsBar.setBackground(Color.decode("#8bb1ed"));
-        settingsBar.setLayout(new GridLayout(1,5));
-        JPanel[] settingspanelHolder = new JPanel[5];
+        settingsBar.setLayout(new BorderLayout());
 
-        for(int m = 0; m < 5; m++) {
-            settingspanelHolder[m] = new JPanel();
-            settingspanelHolder[m].setBackground(Color.decode("#8bb1ed"));
-            settingsBar.add(settingspanelHolder[m]);
-        }
-
-
-        JButton settings = new JButton(new ImageIcon(((new ImageIcon("Res/SettingsButon.png")).getImage()).getScaledInstance(15, 15, java.awt.Image.SCALE_SMOOTH)));
+        JButton settings = new JButton(new ImageIcon(((new ImageIcon("Res/SettingsButon.png")).getImage()).getScaledInstance(35, 35, java.awt.Image.SCALE_SMOOTH)));
 
         //removes back ground and border of button so its just image
         settings.setBorder(BorderFactory.createEmptyBorder());
         settings.setContentAreaFilled(false);
+
+        settingsBar.add(BorderLayout.WEST, settings);
 
         settings.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -182,12 +177,11 @@ public class GUIHome {
                 }
             }
         });
-        settingspanelHolder[4].add(settings);
 
         //the top block contains the settingsBar and...
         tempPan.add(settingsBar, BorderLayout.NORTH);
+        tempPan.setBackground(Color.red);
         tempPan.add(imaPanel,BorderLayout.CENTER);
-
 
         //logo panel
         JPanel logoPan = new JPanel();

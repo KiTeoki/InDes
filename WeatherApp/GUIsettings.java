@@ -14,6 +14,7 @@ public class GUIsettings
     //keep as private so can be updated by listener
     private static JComboBox cityList;
     private static JLabel locationInfo;
+
     //Called by listener: changes location if possible, otherwise changes available locations
     private static void updateComboBox(ItemEvent e, APIInterface apii){
         //Two will be thrown in sequence: deselect, select. Only want the select listener, which has stateChange==1
@@ -46,17 +47,21 @@ public class GUIsettings
     public static JPanel loadSettings(int day, APIInterface apii) throws IOException
     {
         JFrame base = GUIBasic.loadhomeScreen();
+
+        // This contains goBackPanel and mainPanel.
         JPanel settingsPanel = new JPanel();
-        // TODO: Add one more panel to the layout if we get the PIN working.
         settingsPanel.setLayout(new BorderLayout());
-        settingsPanel.setBackground(Color.cyan);
+        settingsPanel.setBackground(Color.decode("#8bb1ed"));
 
+        JPanel goBackPanel = new JPanel();
+        goBackPanel.setBackground(Color.decode("#8bb1ed"));
+        goBackPanel.setLayout(new BorderLayout());
+
+        // This contains dropdownPanel and two empty panels to center dropdown
+        // panel.
         JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BorderLayout());
-        mainPanel.setBackground(Color.cyan);
-
-        JLabel locLabel = new JLabel("Enter your location.");
-        mainPanel.add(BorderLayout.NORTH, locLabel);
+        mainPanel.setLayout(new GridLayout(3,1));
+        mainPanel.setBackground(Color.decode("#8bb1ed"));
 
         JPanel dropdownPanel = new JPanel();
         //Information/instructional label
@@ -71,22 +76,24 @@ public class GUIsettings
         //Set sensible width, prevents going off side of window
         cityList.setPrototypeDisplayValue("XXXXXXXXXXXXXXXXXXXXX");
         dropdownPanel.add(cityList, BorderLayout.CENTER);
+        dropdownPanel.setBackground(Color.decode("#8bb1ed"));
 
+        JPanel lowerPadding = new JPanel();
+        lowerPadding.setBackground(Color.decode("#8bb1ed"));
+
+        JPanel upperPadding = new JPanel();
+        upperPadding.setBackground(Color.decode("#8bb1ed"));
+
+        mainPanel.add(upperPadding);
         mainPanel.add(dropdownPanel);
+        mainPanel.add(lowerPadding);
 
-        JPanel goBackPanel = new JPanel();
-        goBackPanel.setBackground(Color.cyan);
-        goBackPanel.setLayout(new GridLayout(1,5));
+        JButton backButton = new JButton(new ImageIcon(((new ImageIcon("Res/HomeButton.png")).getImage()).getScaledInstance(45, 45, java.awt.Image.SCALE_SMOOTH)));
 
-        JPanel[] backPanelHolder = new JPanel[5];
+        //removes back ground and border of button so its just image
+        backButton.setBorder(BorderFactory.createEmptyBorder());
+        backButton.setContentAreaFilled(false);
 
-        for(int m = 0; m < 5; m++) {
-            backPanelHolder[m] = new JPanel();
-            backPanelHolder[m].setBackground(Color.yellow);
-            goBackPanel.add(backPanelHolder[m]);
-        }
-
-        JButton backButton = new JButton();
         backButton.addActionListener(e -> {
             try {
                 base.remove(settingsPanel);
@@ -96,26 +103,12 @@ public class GUIsettings
             }catch(IOException r){
                 r.printStackTrace();
             }
-
-
         });
-        backPanelHolder[0].add(backButton);
 
-//        mainPanel.add(BorderLayout.NORTH,goBackPanel);
-
-        // TODO: Put the PIN back in once core functionality is working.
-        /*//pin panel
-        JPanel pinPanel = new JPanel();
-        pinPanel.setBackground(Color.cyan);
-        JLabel logoLabel = new JLabel("change your pin");
-        pinPanel.add(logoLabel);
-
-        settingsPanel.add(pinPanel);*/
+        goBackPanel.add(BorderLayout.WEST, backButton);
 
         settingsPanel.add(goBackPanel, BorderLayout.NORTH);
         settingsPanel.add(mainPanel, BorderLayout.CENTER);
-
-//        settingsPanel.add(dropdownPanel, BorderLayout.SOUTH);
 
         return settingsPanel;
     }
