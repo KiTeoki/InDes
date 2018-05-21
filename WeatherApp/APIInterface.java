@@ -22,7 +22,7 @@ public class APIInterface {
         //Load JSON of cities
         try {
             //open file, tokenise, interpret as JSONArray, close file
-            FileReader cityListFile = new FileReader("WeatherApp/city.list.min.json");
+            FileReader cityListFile = new FileReader("InDes/WeatherApp/city.list.min.json");
             JSONTokener cityListTokens = new JSONTokener(cityListFile);
             cityList = new JSONArray(cityListTokens);
             cityListFile.close();
@@ -30,7 +30,7 @@ public class APIInterface {
             System.out.println("City list file not found");
         }
         //Read current location from file
-        File currentCityFile = new File("WeatherApp/config.txt");
+        File currentCityFile = new File("InDes/WeatherApp/config.txt");
         try {
             FileReader cityFileReader = new FileReader(currentCityFile);
             BufferedReader cityIDReader = new BufferedReader(cityFileReader);
@@ -98,7 +98,7 @@ public class APIInterface {
         int matchID = this.searchFile(newLoc);
         try {
             //Update config.txt with new location
-            File currentCityFile = new File("WeatherApp/config.txt");
+            File currentCityFile = new File("InDes/WeatherApp/config.txt");
             //make file if it does not exist
             currentCityFile.createNewFile();
             FileWriter w = new FileWriter(currentCityFile);

@@ -22,7 +22,7 @@ public class GUIHome {
         ImageIcon icon = new javax.swing.ImageIcon(url);
         Image temp = icon.getImage();
 
-        //Scale image to the width of window screen divided by scale. Scale height to preserve aspect ratio of image.
+        //Scale image to the width of window screen divided by scale. Scale height to pInDes/Reserve aspect ratio of image.
         ImageIcon scaledicon = new ImageIcon(temp.getScaledInstance( (int)Math.round(GUIBasic.frame.getWidth() / scale), (int) Math.round((icon.getIconHeight()*GUIBasic.frame.getWidth())/(scale*icon.getIconWidth())), Image.SCALE_SMOOTH));
 
         jl.setIcon(scaledicon);
@@ -33,77 +33,77 @@ public class GUIHome {
     private static String clothesEnumToFile(Clothes c) {
         switch(c) {
             case TSHIRT:
-                return "Res/tshirt.png";
+                return "InDes/Res/tshirt.png";
             case RAINCOAT:
-                return "Res/umbrella.png";
+                return "InDes/Res/umbrella.png";
             case JACKET:
-                return "Res/jumper.png";
+                return "InDes/Res/jumper.png";
             case WARMCOAT:
-                return "Res/coat.png";
+                return "InDes/Res/coat.png";
             case SHORTS:
-                return "Res/shorts.png";
+                return "InDes/Res/shorts.png";
             case TROUSERS:
-                return "Res/jeans.png";
+                return "InDes/Res/jeans.png";
             case TRAINERS:
-                return "Res/trainers.png";
+                return "InDes/Res/trainers.png";
             case RAINBOOTS:
-                return "Res/wellies.png";
+                return "InDes/Res/wellies.png";
             case FLIPFLOP:
-                return "Res/flipflops.png";
+                return "InDes/Res/flipflops.png";
         }
-        return "Res/tshirt.png";
+        return "InDes/Res/tshirt.png";
     }
 
-// method that takes in a weather Enum and returns the relative address of the image for this weather
+// method that takes in a weather Enum and returns the relative addInDes/Ress of the image for this weather
     private static String weatherEnumToFile(Weather weather){
         switch(weather){
             case SUNNY:
-                return "Res/Sunny.png";
+                return "InDes/Res/Sunny.png";
             case RAINY:
-                return "Res/rainy.png";
+                return "InDes/Res/rainy.png";
             case SNOWY:
-                return "Res/Snowy.png";
+                return "InDes/Res/Snowy.png";
             case THUNDER:
-                return "Res/thunder.png";
+                return "InDes/Res/thunder.png";
             case WINDY:
-                return "Res/windy.png";
+                return "InDes/Res/windy.png";
             case SUNCLOUD:
-                return "Res/suncloud.png";
+                return "InDes/Res/suncloud.png";
             case CLOUD:
-                return "Res/cloudy.png";
+                return "InDes/Res/cloudy.png";
         }
-        return "Res/Sunny.png";
+        return "InDes/Res/Sunny.png";
     }
-    // method that takes in a temperature as a double and returns the thermometer image that represents this tempriture
+    // method that takes in a temperature as a double and returns the thermometer image that repInDes/Resents this tempriture
     private static String tempToFile(double temp){
         if (temp<-5.0){
-            return "Res/therm14.png";
+            return "InDes/Res/therm14.png";
         }else if (temp <0){
-            return "Res/therm13.png";
+            return "InDes/Res/therm13.png";
         }else if (temp <5){
-            return "Res/therm12.png";
+            return "InDes/Res/therm12.png";
         }else if (temp <10){
-            return "Res/therm11.png";
+            return "InDes/Res/therm11.png";
         }else if (temp<13){
-            return "Res/therm10.png";
+            return "InDes/Res/therm10.png";
         }else if (temp < 15){
-            return "Res/therm9.png";
+            return "InDes/Res/therm9.png";
         }else if (temp<18){
-            return "Res/therm8.png";
+            return "InDes/Res/therm8.png";
         }else if (temp < 20){
-            return "Res/therm7.png";
+            return "InDes/Res/therm7.png";
         }else if(temp<23){
-            return "Res/therm6.png";
+            return "InDes/Res/therm6.png";
         }else if (temp<25){
-            return "Res/therm5.png";
+            return "InDes/Res/therm5.png";
         }else if(temp<28){
-            return "Res/therm4.png";
+            return "InDes/Res/therm4.png";
         }else if (temp<30){
-            return "Res/therm3.png";
+            return "InDes/Res/therm3.png";
         }else if (temp <35){
-            return "Res/therm2.png";
+            return "InDes/Res/therm2.png";
         }else{
-            return "Res/therm1.png";
+            return "InDes/Res/therm1.png";
         }
     }
 
@@ -135,7 +135,7 @@ public class GUIHome {
         double temp = weatherForSelectedDay.getTemp();
 
         //font that is used is loaded in and size is set
-        InputStream is = new FileInputStream(new File("Res/font.ttf"));
+        InputStream is = new FileInputStream(new File("InDes/Res/font.ttf"));
         Font font = null;
         try {
             Font tempfont = Font.createFont(Font.TRUETYPE_FONT, is);
@@ -171,7 +171,7 @@ public class GUIHome {
         }
 
 
-        JButton settings = new JButton(new ImageIcon(((new ImageIcon("Res/SettingsButon.png")).getImage()).getScaledInstance(15, 15, java.awt.Image.SCALE_SMOOTH)));
+        JButton settings = new JButton(new ImageIcon(((new ImageIcon("InDes/Res/SettingsButon.png")).getImage()).getScaledInstance(15, 15, java.awt.Image.SCALE_SMOOTH)));
 
         //removes back ground and border of button so its just image
         settings.setBorder(BorderFactory.createEmptyBorder());
@@ -192,6 +192,7 @@ public class GUIHome {
         settingspanelHolder[4].add(settings);
 
         //the top block contains the settingsBar and...
+        // (!) tempPan.setLayout(new GridLayout(2,1));
         tempPan.add(settingsBar, BorderLayout.NORTH);
         tempPan.add(imaPanel,BorderLayout.CENTER);
 
@@ -210,7 +211,7 @@ public class GUIHome {
 
         //make left button
         if(day != 0){
-            JButton left = new JButton(new ImageIcon(((new ImageIcon("Res/buttonleft.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
+            JButton left = new JButton(new ImageIcon(((new ImageIcon("InDes/Res/buttonleft.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
 
             //removes back ground and border of button so its just image
             left.setBorder(BorderFactory.createEmptyBorder());
@@ -235,7 +236,7 @@ public class GUIHome {
 
         //make right button
         if(day != 4){
-            JButton right = new JButton(new ImageIcon(((new ImageIcon("Res/rightbutton.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
+            JButton right = new JButton(new ImageIcon(((new ImageIcon("InDes/Res/rightbutton.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
 
             //removes back ground and border of button so its just image
             right.setBorder(BorderFactory.createEmptyBorder());
