@@ -31,7 +31,7 @@ public class GUIsettings
                     for (String partMatch : partMatches) {
                         cityList.addItem(partMatch);
                     }
-                    locationInfo.setText(partMatches.size() + " matching locations found. Please select from new list.");
+                    locationInfo.setText("found locations. Please select from new list.");
                 } else {
                     //No matching cities, reset menu
                     ArrayList<String> allCities = apii.getCityList();

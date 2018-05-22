@@ -32,7 +32,7 @@ public class GUIHome {
             case TSHIRT:
                 return "Res/tshirt.png";
             case RAINCOAT:
-                return "Res/umbrella.png";
+                return "Res/raincoat.png";
             case JACKET:
                 return "Res/jumper.png";
             case WARMCOAT:
