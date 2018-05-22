@@ -1,0 +1,7 @@
+﻿One deviation from our design is that we have restricted the available weather locations to GB only. Although our API provides global weather forecasts, we can only look up a location by name or latitude/longitude and due to many cities in different countries having the same name it would be too hard to distinguish the entered location with only the name field. We have restricted the available locations to GB which removes the majority of duplicates and makes setting/changing location much easier.
+
+
+Another deviation from the design is that we have no popups when an item of clothing is clocked on. This is due to time constraints, and if we continued to develop the app we would be able to implement this feature.
+
+
+A third deviation is the lack of the PIN feature. This is due to time constraints and would be implemented given additional time.
